@@ -1,0 +1,74 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, system-ui, sans-serif;
+}
+
+body {
+  height: 100vh;
+}
+
+header {
+  background-color: slategray;
+  color: whitesmoke;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding: 2rem;
+}
+
+main {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.bookshelf {
+  padding-top: 2rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.book-card {
+  justify-items: center;
+  display: grid;
+  background-color: lightgray;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  min-height: 200px;
+  width: max(30vw, 300px);
+  gap: 0.5rem;
+}
+
+.delete-btn,
+.add-book-btn {
+  background-color: slategray;
+  color: whitesmoke;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.delete-btn:hover,
+.add-book-btn:hover {
+  background-color: darkslategray;
+}
+
+.button-container {
+  display: grid;
+  justify-content: center;
+}
+
+.book-form {
+  grid-column: 2 / 3;
+  height: 100%;
+  padding: 2rem;
+  width: 300px;
+}
