@@ -1,45 +1,33 @@
-const myLibrary = [];
+class Library {
+  books = [];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-
-  this.read = read ? "read" : "not read yet";
-
-  this.id = crypto.randomUUID();
-  this.info = function () {
-    return (
-      this.title +
-      " by " +
-      this.author +
-      ", " +
-      this.pages +
-      " pages, " +
-      this.read
-    );
-  };
-}
-
-Book.prototype.toggleRead = function (id) {
-  const index = myLibrary.findIndex((book) => book.id === id);
-  const book = myLibrary[index];
-  if (book.read === "read") {
-    book.read = "not read yet";
-  } else if (book.read === "not read yet") {
-    book.read = "read";
+  addBook(book) {
+    this.books.push(book);
   }
-};
 
-function addBookToLibrary(title, author, pages, read) {
-  myLibrary.push(new Book(title, author, pages, read));
+  removeBook(id) {
+    const index = this.books.findIndex((book) => book.id === id);
+    if (index !== -1) {
+      this.books.splice(index, 1);
+      addToPage(myLibrary.books);
+    }
+  }
 }
 
-function removeBook(id) {
-  const index = myLibrary.findIndex((book) => book.id === id);
-  if (index !== -1) {
-    myLibrary.splice(index, 1);
-    addToPage(myLibrary);
+const myLibrary = new Library();
+
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read ? "read" : "not read yet";
+  }
+
+  id = crypto.randomUUID();
+
+  toggleRead() {
+    this.read = this.read === "read" ? "not read yet" : "read";
   }
 }
 
@@ -80,14 +68,14 @@ function addToPage(arr) {
     delButton.classList.add("delete-btn");
     delButton.innerText = "Delete";
     bookCard.appendChild(delButton);
-    delButton.addEventListener("click", () => removeBook(book.id));
+    delButton.addEventListener("click", () => myLibrary.removeBook(book.id));
 
     const toggleReadButton = document.createElement("button");
     toggleReadButton.classList.add("toggle-read-btn");
     toggleReadButton.innerText = "Mark as read/unread";
     bookCard.appendChild(toggleReadButton);
     toggleReadButton.addEventListener("click", () => {
-      Book.prototype.toggleRead(book.id);
+      book.toggleRead();
       readElement.innerText = "Status: " + book.read;
     });
 
@@ -116,8 +104,8 @@ bookFormButton.addEventListener("click", (event) => {
   const read = document.querySelector("#read").checked;
 
   if (title && author && pages && pages > 0) {
-    addBookToLibrary(title, author, pages, read);
-    addToPage(myLibrary);
+    myLibrary.addBook(new Book(title, author, pages, read));
+    addToPage(myLibrary.books);
     formDialog.close();
     form.reset();
   } else {
@@ -125,10 +113,10 @@ bookFormButton.addEventListener("click", (event) => {
   }
 });
 
-addBookToLibrary("The Hunger Games", "Suzanne Collins", 374, true);
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
-addBookToLibrary("1984", "George Orwell", 328, false);
-addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 281, true);
-addBookToLibrary("Pride and Prejudice", "Jane Austen", 432, false);
+myLibrary.addBook(new Book("The Hunger Games", "Suzanne Collins", 374, true));
+myLibrary.addBook(new Book("The Hobbit", "J.R.R. Tolkien", 295, true));
+myLibrary.addBook(new Book("1984", "George Orwell", 328, false));
+myLibrary.addBook(new Book("To Kill a Mockingbird", "Harper Lee", 281, true));
+myLibrary.addBook(new Book("Pride and Prejudice", "Jane Austen", 432, false));
 
-addToPage(myLibrary);
+addToPage(myLibrary.books);
