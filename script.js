@@ -98,19 +98,38 @@ addBookButton.addEventListener("click", () => {
 bookFormButton.addEventListener("click", (event) => {
   event.preventDefault();
 
-  const title = document.querySelector("#title").value;
-  const author = document.querySelector("#author").value;
-  const pages = document.querySelector("#pages").value;
-  const read = document.querySelector("#read").checked;
+  const title = document.querySelector("#title");
+  const author = document.querySelector("#author");
+  const pages = document.querySelector("#pages");
+  const read = document.querySelector("#read");
 
-  if (title && author && pages && pages > 0) {
-    myLibrary.addBook(new Book(title, author, pages, read));
-    addToPage(myLibrary.books);
-    formDialog.close();
-    form.reset();
-  } else {
-    alert("Please fill in all fields and ensure pages is a positive number.");
+  title.setCustomValidity("");
+  if (!title.value) {
+    title.setCustomValidity("Please enter a title");
+    title.reportValidity();
+    return;
   }
+
+  author.setCustomValidity("");
+  if (!author.value) {
+    author.setCustomValidity("Please enter an author");
+    author.reportValidity();
+    return;
+  }
+
+  pages.setCustomValidity("");
+  if (!pages.value || pages.value < 1) {
+    pages.setCustomValidity("Please enter number of pages greater than 0");
+    pages.reportValidity();
+    return;
+  }
+
+  myLibrary.addBook(
+    new Book(title.value, author.value, pages.value, read.checked),
+  );
+  addToPage(myLibrary.books);
+  formDialog.close();
+  form.reset();
 });
 
 myLibrary.addBook(new Book("The Hunger Games", "Suzanne Collins", 374, true));

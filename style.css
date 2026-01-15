@@ -7,11 +7,13 @@
 
 body {
   height: 100vh;
+  background-color: #f8f9fa;
+  color: #2d3748;
 }
 
 header {
-  background-color: slategray;
-  color: whitesmoke;
+  background-color: #4a5568;
+  color: #ffffff;
   display: grid;
   align-items: center;
   justify-items: center;
@@ -39,30 +41,45 @@ main {
 .book-card {
   justify-items: center;
   display: grid;
-  background-color: lightgray;
-  border-radius: 0.5rem;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
   padding: 2rem;
   min-height: 200px;
   width: 300px;
   gap: 0.5rem;
   text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(74, 85, 104, 0.15);
 }
 
 .delete-btn,
 .add-book-btn,
 .toggle-read-btn {
-  background-color: slategray;
-  color: whitesmoke;
+  background-color: #4a5568;
+  color: #ffffff;
   border: none;
   border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .delete-btn:hover,
 .add-book-btn:hover,
 .toggle-read-btn:hover {
-  background-color: darkslategray;
+  background-color: #2d3748;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
 }
 
 .button-container {
@@ -82,34 +99,89 @@ main {
   padding: 2rem;
   width: 300px;
   border-radius: 0 0 0 1rem;
-  background-color: slategrey;
-  color: white;
+  background-color: #4a5568;
+  color: #ffffff;
+}
+
+.book-form h3 {
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.book-form label {
+  color: #ffffff;
+  font-weight: 500;
 }
 
 #book-form-button {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   border: none;
   border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
   cursor: pointer;
-  background-color: lightgrey;
+  background-color: #ffffff;
+  color: #4a5568;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#book-form-button:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
 }
 
 fieldset {
   display: grid;
   align-items: center;
   justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+fieldset legend {
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0 0.5rem;
 }
 
 fieldset > input {
   margin: 1rem;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: #ffffff;
 }
 
-input {
-  padding: 0.5rem;
+input[type="text"],
+input[type="number"] {
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #cbd5e0;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  color: #2d3748;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: #4a5568;
+  box-shadow: 0 0 0 3px rgba(74, 85, 104, 0.1);
 }
 
 dialog {
   border: none;
   position: relative;
+  border-radius: 0.75rem;
+  background-color: #4a5568;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid #e2e8f0;
+  margin: 2rem 0;
 }
